@@ -27,7 +27,7 @@
 
         // Функция для загрузки точек с сервера
         function loadPoints() {
-            fetch('http://127.0.0.1:5000/get_points')  // Замените на URL вашего Flask-сервера
+            fetch('http://127.0.0.1:5000/get_points')  // Убедитесь, что URL правильный
                 .then(response => response.json())
                 .then(points => {
                     points.forEach(point => {
