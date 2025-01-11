@@ -27,13 +27,13 @@
 
         // Функция для загрузки точек с сервера
         function loadPoints() {
-            fetch('https://http://127.0.0.1:5000/get_points')  // Замените на URL вашего Flask-сервера
+            fetch('http://127.0.0.1:5000/get_points')  // Замените на URL вашего Flask-сервера
                 .then(response => response.json())
                 .then(points => {
                     points.forEach(point => {
                         // Добавление маркера на карту
-                        var marker = L.marker([point.latitude, point.longitude]).addTo(map);
-                        marker.bindPopup(`Цвет: ${point.color}`).openPopup();
+                        var marker = L.marker([point.широта, point.долгота]).addTo(map);
+                        marker.bindPopup(`Цвет: ${point.цвет}`).openPopup();
                     });
                 })
                 .catch(error => console.error('Ошибка при загрузке точек:', error));
