@@ -31,9 +31,18 @@
                 .then(response => response.json())
                 .then(points => {
                     points.forEach(point => {
-                        // Добавление маркера на карту
-                        var marker = L.marker([point.широта, point.долгота]).addTo(map);
-                        marker.bindPopup(`Цвет: ${point.цвет}`).openPopup();
+                        // Определяем цвет кружка
+                        var color = point.color === 'blue' ? 'blue' : 'green';
+
+                        // Добавление кружка на карту
+                        var circle = L.circleMarker([point.latitude, point.longitude], {
+                            color: color,  // Цвет обводки
+                            fillColor: color,  // Цвет заливки
+                            fillOpacity: 0.8,  // Прозрачность заливки
+                            radius: 8  // Радиус кружка
+                        }).addTo(map);
+
+                        circle.bindPopup(`Цвет: ${point.color}`).openPopup();
                     });
                 })
                 .catch(error => console.error('Ошибка при загрузке точек:', error));
