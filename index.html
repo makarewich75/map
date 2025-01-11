@@ -25,9 +25,22 @@
             attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         }).addTo(map);
 
-        // Пример добавления точки на карту
-        var marker = L.marker([50.4501, 30.5234]).addTo(map);
-        marker.bindPopup("Центр Киева").openPopup();
+        // Функция для загрузки точек с сервера
+        function loadPoints() {
+            fetch('https://http://127.0.0.1:5000/get_points')  // Замените на URL вашего Flask-сервера
+                .then(response => response.json())
+                .then(points => {
+                    points.forEach(point => {
+                        // Добавление маркера на карту
+                        var marker = L.marker([point.latitude, point.longitude]).addTo(map);
+                        marker.bindPopup(`Цвет: ${point.color}`).openPopup();
+                    });
+                })
+                .catch(error => console.error('Ошибка при загрузке точек:', error));
+        }
+
+        // Загружаем точки при открытии карты
+        loadPoints();
     </script>
 </body>
 </html>
